@@ -1,28 +1,20 @@
 <!doctype html>
 <html>
   <head>
-    <title><%= json.project.seo_title %></title>
+    <title>SOL Timeline</title>
     <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="__sync_contentCategory" content="meterA">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css?1">
-
-
+    <link rel="stylesheet" type="text/css" href="style.css?4">
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
-
-    <%= t.include("partials/_head.html") %>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+    <script src="http://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
 
   </head>
 
   <%= !json.project.embedded ? "<body>" : "<body is='responsive-body'>" %>
-
-    <%= t.include("partials/_nav.html") %>
 
 
     <div class="flex-container swiper-container">
@@ -31,9 +23,8 @@
         
         <div class="milestone intro swiper-slide">
           <div class="intro-img"><img class="daisy" src="./assets/photos/white_daisy.jpg"></div>
-          <h1>Summer of Love Timeline</h1>
-          <p class="deck">Intro goes here....</p>
-          <%= t.include("partials/_social.html") %>
+          <h1>There’s something’s happening here…</h1>
+          <p class="deck">The Summer of Love wasn’t just one moment in 1967, it was a culmination of events that resulted in a massive counterculture movement rooted in San Francisco. It birthed hippies and flower children, rocked the music world and more. Here are some moments from the era that defined a generation.</p>
           <div class="arrow">
             <span>Swipe right</span><br>
             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
@@ -64,7 +55,9 @@
           <% } %>
 
           <% if (t.class == 'image') { %>
-          <div class="milestone img-text swiper-slide">
+          <div class="milestone swiper-slide">
+
+            <div class="desktop img-text">
             <div class="half-img">
               <img src="http://ww2.hdnux.com/photos/57/43/16/<%= t.wcm_image_id %>/3/1000x0.jpg">
               <div class="credit"><%= t.photographer %></div>
@@ -74,6 +67,19 @@
               <p class="date"><%= t.day_month %>, <%= t.year %></p>  
               <p class="deck"><%= t.text %></p>  
             </div>
+            </div>
+
+            <div class="mobile-bg" style="background-image: url(http://ww2.hdnux.com/photos/57/43/16/<%= t.wcm_image_id %>/3/1000x0.jpg);">
+              <div class="half-img mobile"></div>
+              <div class="text-wrapper mobile">
+                <h2><%= t.headline %></h2>
+                <p class="date mobile"><%= t.day_month %>, <%= t.year %></p> 
+                <span class="extra-btn"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
+                <div class="extra"> 
+                  <p class="deck mobile"><%= t.text %></p>  
+                </div>
+              </div>
+            </div>
           </div>
 
           <% } %>
@@ -81,26 +87,14 @@
          <% }); %>
 
          <div class="milestone outro swiper-slide">
-         <div class="stories">
-            <p>Related Stories</p>
-           <a href="http://www.sfchronicle.com/collegesports/article/Tara-VanDerveer-s-climb-to-1-000-wins-An-oral-10901515.php">Tara VanDerveer’s climb to 1,000 wins: An oral history</a><br><br>
-           <a href="http://www.sfchronicle.com/collegesports/article/From-humble-start-a-legendary-career-for-10904707.php">From humble start, a legendary career for Stanford’s Vanderveer</a>
 
-
-
-
-           
-         </div>
           <div class="credits">
             <div class="group">
             <p>Credits</p>
-              <div class="entry">Mike Massa<br>
-                <a href="mailto:mmassa@sfchronicle.com">mmassa@sfchronicle.com</a>
+              <div class="entry">Reporter<br>Mariecar Mendoza<br>
+                <a href="mailto:mmendoza@sfchronicle.com">mmendoza@sfchronicle.com</a>
               </div>
-              <div class="entry">Janny Hu<br>
-                <a href="mailto:jhu@sfchronicle.com">jhu@sfchronicle.com</a>
-              </div>
-              <div class="entry">Lucio Villa<br>
+              <div class="entry">Interactive Producer<br>Lucio Villa<br>
                 <a href="mailto:lvilla@sfchronicle.com">lvilla@sfchronicle.com</a>
               </div>
             </div>
@@ -124,13 +118,18 @@
         grabCursor: true,
         pagination: '.swiper-pagination',
         keyboardControl: true,
-        mousewheelControl: true,
+        mousewheelControl: false,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
         pagination: '.swiper-pagination',
         paginationType: 'progress'
-      })  
+      });
+
+      $( ".extra-btn" ).click(function() {
+        $( ".extra" ).toggle( function() {
+          // Animation complete.
+        });
+      }); 
     </script>
-    <%= t.include("partials/_helloSFC.html") %>
   </body>
 </html>
